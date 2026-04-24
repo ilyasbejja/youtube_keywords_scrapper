@@ -10,8 +10,8 @@ from pathlib import Path
 import base64
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-GITHUB_OWNER = "your_username"
-GITHUB_REPO = "your_repo_name"
+GITHUB_OWNER = "ilyasbejja"
+GITHUB_REPO = "youtube_keywords_scrapper"
 GITHUB_BRANCH = "main"
 
 if not GITHUB_TOKEN:
