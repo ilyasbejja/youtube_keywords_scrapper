@@ -1,6 +1,7 @@
 from prefect import flow, task
 from prefect.logging import get_run_logger
-
+from prefect.blocks.system import Secret
+from prefect.variables import Variable
 import os
 import requests
 import pandas as pd
@@ -9,7 +10,8 @@ from datetime import datetime
 from pathlib import Path
 import base64
 
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") or Secret.load("github-token").get()
+API_KEY = os.getenv("YOUTUBE_API_KEY") or Secret.load("youtube-api-key").get()
 GITHUB_OWNER = "ilyasbejja"
 GITHUB_REPO = "youtube_keywords_scrapper"
 GITHUB_BRANCH = "main"
@@ -18,7 +20,6 @@ if not GITHUB_TOKEN:
     raise ValueError("Missing GITHUB_TOKEN environment variable")
 
 # Configuration
-API_KEY = os.getenv("YOUTUBE_API_KEY")
 if not API_KEY:
     raise ValueError("Missing YOUTUBE_API_KEY environment variable")
 
